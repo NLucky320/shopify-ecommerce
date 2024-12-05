@@ -12,7 +12,7 @@ const Layout: FC = ({children}) => {
   return (
     <div className={s.root}>
       <Navbar />
-      <Sidebar>
+      <Sidebar isOpen={ui.isSidebarOpen}>
         <CartSidebar />
       </Sidebar>
       <main className="fit">
