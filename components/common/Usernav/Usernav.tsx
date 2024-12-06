@@ -11,7 +11,7 @@ const Usernav: FC = () => {
     <nav>
       <ul className={s.list}>
         <li className={s.item}>
-          <Cart onClick={ui.setSidebarOpen}/>
+          <Cart onClick={ui.openSidebar}/>
         </li>
         <li className={s.item}>
           <Link href="/wishlist">
