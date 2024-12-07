@@ -1,28 +1,52 @@
-
-import React, { FC, useEffect, useRef } from 'react'
+import React, { FC, useEffect, useRef } from "react";
+import {
+  disableBodyScroll,
+  enableBodyScroll,
+  clearAllBodyScrollLocks,
+} from "body-scroll-lock";
 
 interface Props {
-  children: any,
-  isOpen:boolean,
-    onClose: () => void
+  children: any;
+  isOpen: boolean;
+  onClose: () => void;
 }
 
-const Sidebar: FC<Props> = ({ children, isOpen,onClose}) => {
-  const ref=useRef() as React.MutableRefObject<HTMLDivElement>
- 
-  useEffect(()=>{
-    if(ref.current){
-      console.log(ref.current)
+const Sidebar: FC<Props> = ({ children, isOpen, onClose }) => {
+  const ref = useRef() as React.MutableRefObject<HTMLDivElement>;
+
+  // useEffect(() => {
+  //   if (ref.current) {
+  //     if (isOpen) {
+  //       disableBodyScroll(ref.current);
+  //     } else {
+  //       enableBodyScroll(ref.current);
+  //     }
+  //   }
+  //   return () => {
+  //     clearAllBodyScrollLocks;
+  //   };
+  // }, [isOpen]);
+  useEffect(() => {
+    if (ref.current) {
+      if (isOpen) {
+        document.body.classList.add("no-scroll");
+      } else {
+        document.body.classList.remove("no-scroll");
+      }
     }
-  },[isOpen])
+
+    return () => {
+      document.body.classList.remove("no-scroll");
+    };
+  }, [isOpen]);
 
   return (
     <>
-      { isOpen ? (
+      {isOpen ? (
         <div ref={ref} className="fixed inset-0 overflow-hidden h-full z-50">
           <div className="absolute inset-0 overflow-hidden">
             <div
-            onClick={onClose}
+              onClick={onClose}
               className="absolute inset-0 bg-black bg-opacity-50 transition-opacity"
             />
             <section className="absolute inset-y-0 right-0 pl-10 max-w-full flex sm:pl-16 outline-none">
@@ -34,9 +58,9 @@ const Sidebar: FC<Props> = ({ children, isOpen,onClose}) => {
             </section>
           </div>
         </div>
-      ) : null }
+      ) : null}
     </>
-  )
-}
+  );
+};
 
-export default Sidebar
+export default Sidebar;
