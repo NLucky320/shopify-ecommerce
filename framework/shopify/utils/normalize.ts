@@ -1,34 +1,48 @@
-
 import {
   ImageEdge,
   MoneyV2,
   Product as ShopifyProduct,
-  ProductOption
-} from "../schema"
+  ProductOption,
+} from "../schema";
 
-import { Product } from "@common/types/product"
+import { Product } from "@common/types/product";
 
-const normalizeProductImages = ({edges}: {edges: Array<ImageEdge>}) =>
-  edges.map(({node: { originalSrc: url, ...rest}}) => ({
-      url: `/images/${url}`,
-      ...rest }
-  ))
+const normalizeProductImages = ({ edges }: { edges: Array<ImageEdge> }) =>
+  edges.map(({ node: { originalSrc: url, ...rest } }) => ({
+    url: `/images/${url}`,
+    ...rest,
+  }));
 
-const normalizeProductPrice = ({currencyCode, amount}: MoneyV2) => ({
+const normalizeProductPrice = ({ currencyCode, amount }: MoneyV2) => ({
   value: +amount,
-  currencyCode
-})
+  currencyCode,
+});
 const normalizeProductOption = ({
   id,
   values,
-  name: displayName
+  name: displayName,
 }: ProductOption) => {
-  console.log("ID ", id)
-  console.log("NAME ", displayName)
-  console.log("VALUES ", values)
-  return {}
-}
+  const normalized = {
+    id,
+    displayName,
+    values: values.map((value) => {
+      let output :any = {
+        label: value,
+      };
 
+      if(displayName.match(/colou?r/gi)){
+        output={
+          ...output,
+          hexColor:value
+        }
+      }
+
+
+      return output;
+    }),
+  };
+  return normalized;
+};
 
 export function normalizeProduct(productNode: ShopifyProduct): Product {
   const {
@@ -41,7 +55,7 @@ export function normalizeProduct(productNode: ShopifyProduct): Product {
     priceRange,
     options,
     ...rest
-  } = productNode
+  } = productNode;
 
   const product = {
     id,
@@ -52,11 +66,13 @@ export function normalizeProduct(productNode: ShopifyProduct): Product {
     slug: handle.replace(/^\/+|\/+$/g, ""),
     images: normalizeProductImages(imageConnection),
     price: normalizeProductPrice(priceRange.minVariantPrice),
-options: options ?
-      options.filter(o => o.name !== "Title")
-             .map(o => normalizeProductOption(o)) : [],
-    ...rest
-  }
+    options: options
+      ? options
+          .filter((o) => o.name !== "Title")
+          .map((o) => normalizeProductOption(o))
+      : [],
+    ...rest,
+  };
 
-  return product
+  return product;
 }
