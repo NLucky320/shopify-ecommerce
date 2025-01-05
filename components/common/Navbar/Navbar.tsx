@@ -4,7 +4,7 @@ import { FC } from "react"
 import { Container } from "@components/ui"
 import Link from "next/link"
 import s from "./Navbar.module.css"
-import { Usernav } from "@components/common"
+import { UserNav } from "@components/common"
 
 const Navbar: FC = () => {
 
@@ -32,7 +32,7 @@ const Navbar: FC = () => {
             </Link>
           </nav>
           <div className="flex flex-1 justify-end space-x-8">
-            <Usernav />
+            <UserNav />
           </div>
         </div>
       </div>
