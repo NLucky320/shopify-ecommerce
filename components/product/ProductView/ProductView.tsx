@@ -21,7 +21,7 @@ const ProductView: FC<Props> = ({ product }) => {
 const {openSidebar}=useUI()
 const addItem=useAddItem()
   const variant=getVariant(product,choices)
-  // console.log(variant)
+  console.log(variant)
   const addToCart=()=>{
     try{
 const item={
