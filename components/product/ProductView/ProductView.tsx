@@ -62,7 +62,7 @@ const item={
                   alt={image.alt}
                   width={1050}
                   height={1050}
-                  quality=""
+                  quality="95"
                 />
               </div>
             ))}
