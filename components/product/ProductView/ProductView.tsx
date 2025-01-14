@@ -7,6 +7,7 @@ import { Product } from "@common/types/product";
 import { ProductSlider, Swatch } from "@components/product";
 import { Choices, getVariant } from "../helper";
 import { useUI } from "@components/ui/context";
+import useAddItem from "@framework/cart/use-add-item"
 
 
 interface Props {

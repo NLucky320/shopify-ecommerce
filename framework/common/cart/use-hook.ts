@@ -3,7 +3,9 @@ import { ApiHooks } from "@common/types/api"
 
 
 
-export const useHook=(fn:(apiHooks: ApiHooks))=>{
+export const useHook=(fn:(apiHooks: ApiHooks)=>any)=>{
+
+
 const {hooks}=useApiProvider()
 return fn(hooks)
 }
