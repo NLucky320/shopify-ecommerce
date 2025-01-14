@@ -10,9 +10,9 @@ import { ApiProvider } from "@framework"
 
 
 const Layout: FC = ({children}) => {
-   const { isSidebarOpen, closeSidebar } = useUI()
+   const { isSidebarOpen, closeSidebar } = useUI();
 
-  return (
+return (
  <ApiProvider>
       <div className={s.root}>
         <Navbar />
@@ -26,7 +26,7 @@ const Layout: FC = ({children}) => {
         </main>
         <Footer />
       </div>
-    </ApiProvider>
+  </ApiProvider>
   )
 }
 
