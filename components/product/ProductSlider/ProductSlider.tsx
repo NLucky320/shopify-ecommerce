@@ -29,13 +29,7 @@ const ProductSlider: FC = ({children}) => {
         />
         { Children.map(children, child => {
           if (isValidElement(child)) {
-            // return {
-            //   ...child,
-            //   props: {
-            //     ...child.props,
-            //     className: "keen-slider__slide"
-            //   }
-            // }
+        
                return {
               ...child,
               props: {
@@ -45,11 +39,7 @@ const ProductSlider: FC = ({children}) => {
                 } keen-slider__slide`
               }
             }
-                 // return React.cloneElement(child, {
-            //   className: `${
-            //     child.props.className ? `${child.props.className}` : ""
-            //   } keen-slider__slide`
-            // })
+        
           }
           return child
         }
