@@ -22,7 +22,7 @@ const {openSidebar}=useUI()
 const addItem=useAddItem()
   const variant=getVariant(product,choices)
   // console.log(variant)
-  const addToCart=()=>{
+   const addToCart = async () => {
     try{
 const item={
   productId:String(product?.id),
@@ -32,7 +32,7 @@ const item={
 
 }
   //  alert(JSON.stringify(item))
-   const output = addItem(item)
+   const output =await addItem(item)
       alert(JSON.stringify(output))
    openSidebar()
     }
