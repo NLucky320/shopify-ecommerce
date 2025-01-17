@@ -1,6 +1,7 @@
 import { ApiFetcherOptions } from './../../common/types/api';
 import { useAddItem } from "@common/cart";
 import { MutationHook } from "@common/types/hooks";
+import { getCheckoutId } from '@framework/utils';
 export default useAddItem;
 
 export const handler:MutationHook={
@@ -10,7 +11,7 @@ fetcherOptions:{
   fetcher: async ({fetch, options, input}) => {
 
     const variables = {
-      checkoutId: null,
+      checkoutId: getCheckoutId(),
       lineItems: [
         {
          variantId: input.variantId,
