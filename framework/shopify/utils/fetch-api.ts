@@ -5,7 +5,6 @@ import {
 import { API_URL } from "@framework/const"
 
 const fetchApi = async <T>({
-  url,
   query,
 variables }: ApiFetcherOptions
 ): Promise<ApiFetcherResults<T>> => {

@@ -1,11 +1,15 @@
+import { ApiFetcherOptions } from './../../common/types/api';
 import { useAddItem } from "@common/cart";
 import { MutationHook } from "@common/types/hooks";
 export default useAddItem;
 
 export const handler:MutationHook={
-  fetcher: async ({fetch, input}) => {
-    const response = await fetch({
+fetcherOptions:{
       query: `query { hello }`
+  },
+  fetcher: async ({fetch, options}) => {
+    const response = await fetch({
+ ...options
     })
 
     return response
