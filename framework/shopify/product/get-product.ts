@@ -16,7 +16,8 @@ const getProduct=async(options:{
 }):Promise<ReturnType>=>{
     const {config, variables}=options
     const {data}=await config.fetch<FetchType>({
-        query:getProductQuery,url:config.apiUrl, variables
+        query:getProductQuery, 
+        variables
     })
     // console.log(JSON.stringify(data,null,2))
     // console.log(JSON.stringify(data.productByHandle,null,2))
