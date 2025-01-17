@@ -18,8 +18,7 @@ fetcherOptions:{
         }
       ]
     }
-    const response = await fetch({
-     
+    const response = await fetch({   
        ...options,
        variables
     })
