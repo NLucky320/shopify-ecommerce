@@ -26,4 +26,4 @@ const getProduct=async(options:{
            product: productByHandle ? normalizeProduct(productByHandle) : null
     }
 }
-export default getProduct
+export default getProduct;

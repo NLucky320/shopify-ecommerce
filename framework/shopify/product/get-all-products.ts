@@ -24,4 +24,4 @@ const getAllProducts = async (config: ApiConfig): Promise<Product[]> => {
   return products
 }
 
-export default getAllProducts
+export default getAllProducts;

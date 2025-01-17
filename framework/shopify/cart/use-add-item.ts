@@ -25,7 +25,7 @@ fetcherOptions:{
     })
     return response
   },
-  useHook: ({ fetch }: any) => {
+  useHook: ({ fetch }) => {
    return async (input: any) => {
       const response = await fetch(input)
 

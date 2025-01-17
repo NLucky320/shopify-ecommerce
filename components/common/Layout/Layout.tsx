@@ -1,33 +1,33 @@
+import { FC, useEffect, useState } from "react";
+import s from "./Layout.module.css";
+import { Footer, Navbar } from "@components/common";
+import { Sidebar } from "@components/ui";
+import { CartSidebar } from "@components/cart";
+import { useUI } from "@components/ui/context";
+import { ApiProvider } from "@framework";
 
+const Layout: FC = ({ children }) => {
+  const { isSidebarOpen, closeSidebar } = useUI();
+  const [hydrated, setHydrated] = useState(false);
 
-import { FC } from "react"
-import s from "./Layout.module.css"
-import { Footer, Navbar } from "@components/common"
-import { Sidebar } from "@components/ui"
-import { CartSidebar } from "@components/cart"
-import { useUI } from "@components/ui/context"
-import { ApiProvider } from "@framework"
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
 
+  if (!hydrated) return null;
 
-const Layout: FC = ({children}) => {
-   const { isSidebarOpen, closeSidebar } = useUI();
-
-return (
- <ApiProvider>
+  return (
+    <ApiProvider>
       <div className={s.root}>
         <Navbar />
-        <Sidebar
-          onClose={closeSidebar}
-          isOpen={isSidebarOpen}>
+        <Sidebar onClose={closeSidebar} isOpen={isSidebarOpen}>
           <CartSidebar />
         </Sidebar>
-        <main className="fit">
-          { children }
-        </main>
+        <main className="fit">{children}</main>
         <Footer />
       </div>
-  </ApiProvider>
-  )
-}
+    </ApiProvider>
+  );
+};
 
-export default Layout
+export default Layout;
