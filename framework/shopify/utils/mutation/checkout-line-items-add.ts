@@ -1,6 +1,6 @@
 const checkoutLineItemsAdd = `
   mutation(
-    $checkoutId: "gid://shopify/Checkout/123456789",
+    $checkoutId: ID!,
     $lineItems: [CheckoutLineItemInput!]! ) {
     checkoutLineItemsAdd(checkoutId: $checkoutId, lineItems: $lineItems) {
       checkoutUserErrors {
