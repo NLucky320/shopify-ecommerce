@@ -1,5 +1,5 @@
 
-import { useHook, useMutationHook } from "../../shopify/utils/use-hook"
+import { useHook, useMutationHook } from "../utils/use-hook"
 
 const useAddItem=()=>{
 const hook=useHook((hooks)=>{
