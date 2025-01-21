@@ -1,29 +1,39 @@
-
-import { useApiProvider } from "@common"
-import { ApiHooks } from "@common/types/hooks"
-import { MutationHook } from "@common/types/hooks"
+import { useApiProvider } from "@common";
+import { ApiHooks } from "@common/types/hooks";
+import { MutationHook } from "@common/types/hooks";
+import { useState } from "react";
 export const useHook = (fn: (apiHooks: ApiHooks) => MutationHook) => {
-  const { hooks } = useApiProvider()
-  return fn(hooks)
-}
-export const useMutationHook = (
-  hook: MutationHook
-) => {
-      const { fetcher } = useApiProvider()
+  const { hooks } = useApiProvider();
+  return fn(hooks);
+};
+export const useMutationHook = (hook: MutationHook) => {
+  const { fetcher } = useApiProvider();
   return hook.useHook({
     fetch: (input: any) => {
       return hook.fetcher({
         input,
-            fetch: fetcher,
-            options:hook.fetcherOptions
-      })
-    }
-  })
-}
+        fetch: fetcher,
+        options: hook.fetcherOptions,
+      });
+    },
+  });
+};
 
-export const useSWRHook=(hook:any)=>{
+const useData = () => {
+  const [data, setData] = useState(null);
+
+  if (!data) {
+    setData({ data: "Cart ready" } as any);
+  }
+  return data;
+};
+
+//cache data first if possible
+export const useSWRHook = (hook: any) => {
   return hook.useHook({
-    fetch:hook.fetcher
-  })
-
-}
+    useData() {
+      const data = useData();
+      return data;
+    },
+  });
+};

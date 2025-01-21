@@ -8,12 +8,13 @@ export const handler = {
     query: ""
   },
   fetcher() {
+    console.log("i am not called :(")
     return {
       data: "cart ready!!!"
     }
   },
-  useHook: ({fetch}: any) => {
-    const data = fetch()
+  useHook: ({useData}: any) => {
+    const data = useData()
     return {
       data
     }
