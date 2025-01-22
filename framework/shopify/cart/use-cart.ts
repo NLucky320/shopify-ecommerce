@@ -15,7 +15,7 @@ export const handler = {
       });
       checkout = data.node;
     } else {
-      checkout = await createCheckout();
+    checkout = await createCheckout(fetch)
     }
 
     return checkout;
