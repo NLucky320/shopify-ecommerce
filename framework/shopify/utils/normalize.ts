@@ -9,7 +9,7 @@ import {
   ProductVariantConnection,
   SelectedOption
 } from "../schema"
-import { Cart } from "@common/types/cart"
+import { Cart, LineItem } from "@common/types/cart"
 import { Product } from "@common/types/product"
 
 export const normalizeCart = (checkout: Checkout): Cart => {
@@ -30,7 +30,7 @@ export const normalizeCart = (checkout: Checkout): Cart => {
 
 const normalizeLineItem = ({
   node: { id, title, variant, ...rest}
-}: CheckoutLineItemEdge): any => {
+}: CheckoutLineItemEdge): LineItem => {
   return {
     id,
     variantId: String(variant?.id),
