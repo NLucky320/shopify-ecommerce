@@ -26,14 +26,15 @@ const addItem=useAddItem()
     try{
 const item={
   productId:String(product?.id),
-  variantId:variant?.id,
-  variantOptions:variant?.options,
+        variantId: String(variant?.id),
+        variantOptions: variant?.options,
+        quantity: 1
 
 
 }
   //  alert(JSON.stringify(item))
    const output =await addItem(item)
-      alert(JSON.stringify(output))
+
    openSidebar()
     }
     catch{
