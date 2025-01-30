@@ -39,7 +39,7 @@ const cart=checkoutToCart(checkout)
 
    return cart
   },
-  useHook: ({ useData }: any) => {
+ useHook: ({useData}) => {
     const data = useData({
       swrOptions: {
         revalidateOnFocus: false
