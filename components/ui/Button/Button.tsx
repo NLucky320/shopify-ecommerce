@@ -1,16 +1,22 @@
-import { ButtonHTMLAttributes, FC, ReactNode } from "react"
+import {
+  ButtonHTMLAttributes,
+  ComponentType,
+  FC, HTMLAttributes, ReactNode } from "react"
 import s from "./Button.module.css"
 import cn from "classnames"
 import { LoadingDots } from "@components/ui"
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode | ReactNode[]
     isLoading?: boolean
+      Component?: string | ComponentType<HTMLAttributes<HTMLElement>>
+  href?: string
 }
 
 const Button: FC<Props> = ({
   children,
   className,
     isLoading = false,
+      Component = "button",
   ...rest
 }) => {
     const rootClassName = cn(
@@ -22,7 +28,7 @@ const Button: FC<Props> = ({
   )
 
   return (
-    <button
+    <Component
       className={rootClassName}
       type="button"
       {...rest}
@@ -33,7 +39,7 @@ const Button: FC<Props> = ({
           <LoadingDots />
         </i>
       }
-    </button>
+    </Component>
   )
 }
 export default Button
