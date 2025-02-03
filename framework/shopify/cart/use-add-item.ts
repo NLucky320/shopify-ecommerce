@@ -47,9 +47,13 @@ fetcherOptions:{
  useHook: ({fetch}) => () => {
      const { mutate: updateCart } = useCart()
    return async (input) => {
-      const response = await fetch(input)
+    return new Promise((res) => {
+        setTimeout(async () => {
+          const response = await fetch(input)
           await updateCart(response, false)
-            return response
+          res(response)
+        }, 1000)
+      })
     };
   },
 };
