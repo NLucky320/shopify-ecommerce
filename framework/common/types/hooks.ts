@@ -6,7 +6,8 @@ export interface ApiHooks {
   cart: {
     useAddItem: MutationHook
     useCart: SWRHook
-        useRemoveItem: MutationHook
+    useRemoveItem: MutationHook
+    useUpdateItem: MutationHook
   }
 }
 export type SWRHookContext<Input, Output> = {
