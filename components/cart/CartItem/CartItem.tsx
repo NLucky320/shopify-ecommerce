@@ -21,12 +21,12 @@ const CartItem = ({
   const removeItem = useRemoveItem()
   const updateItem = useUpdateItem()
   const [quantity, setQuantity] = useState(item.quantity)
-  const handleQuantityChange = async (val: number) => {
+  const handleQuantityChange = (val: number) => {
 
     if (Number.isInteger(val) && val >= 0) {
       setQuantity(val)
-      alert(val)
-      await updateItem({
+   
+    updateItem({
         id: item.id,
         variantId: item.variantId,
         quantity: val
@@ -49,10 +49,10 @@ const CartItem = ({
     >
       <div className="w-16 h-16 bg-violet relative overflow-hidden cursor-pointer">
            <Image
-          onClick={() => {}}
           className={s.productImage}
           width={150}
           height={150}
+          alt=''
           src={item.variant.image!.url}
           unoptimized
         />
