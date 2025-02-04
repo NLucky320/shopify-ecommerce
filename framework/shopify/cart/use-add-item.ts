@@ -1,30 +1,30 @@
-import { Cart } from "@common/types/cart"
-import { useAddItem } from "@common/cart";
-import { UseAddItem } from "@common/cart/use-add-item"
-import { MutationHook } from "@common/types/hooks";
-import { checkoutToCart, getCheckoutId } from '@framework/utils';
-import { checkoutLineItemsAddMutation } from '@framework/utils/mutation';
-import { CheckoutLineItemsAddPayload } from "@framework/schema";
-import useCart from "@common/cart/use-cart";
 
+import { useAddItem } from "@common/cart"
+import { UseAddItem } from "@common/cart/use-add-item"
+import useCart from "@common/cart/use-cart"
+import { Cart } from "@common/types/cart"
+import { MutationHook } from "@common/types/hooks"
+import { CheckoutLineItemsAddPayload } from "@framework/schema"
+import { checkoutToCart, getCheckoutId } from "@framework/utils"
+import { checkoutLineItemsAddMutation } from "@framework/utils/mutation"
 
 export default useAddItem as UseAddItem<typeof handler>
-
 
 export type AddItemHookDescriptor = {
   fetcherInput: {
     variantId: string
     quantity: number
   }
-    fetcherOutput: {
+  fetcherOutput: {
     checkoutLineItemsAdd: CheckoutLineItemsAddPayload
   }
   data: Cart
 }
 
+
 export const handler: MutationHook<AddItemHookDescriptor> = {
-fetcherOptions:{
-      query: checkoutLineItemsAddMutation
+  fetcherOptions: {
+    query: checkoutLineItemsAddMutation
   },
   fetcher: async ({fetch, options, input}) => {
 
@@ -37,21 +37,22 @@ fetcherOptions:{
         }
       ]
     }
-        const { data } = await fetch({
+
+    const { data } = await fetch({
        ...options,
        variables
     })
-        const cart = checkoutToCart(data.checkoutLineItemsAdd.checkout)
+
+    const cart = checkoutToCart(data.checkoutLineItemsAdd.checkout)
     return cart
   },
- useHook: ({fetch}) => () => {
-     const { mutate: updateCart } = useCart()
-   return async (input) => {
+  useHook: ({fetch}) => () => {
+    const { mutate: updateCart } = useCart()
+
+    return async (input) => {
       const response = await fetch(input)
       await updateCart(response, false)
       return response
-    };
-  },
-};
-
-
+    }
+  }
+}
