@@ -1,4 +1,3 @@
-
 import {
   ProductOption,
   ProductVariant
@@ -8,6 +7,7 @@ import {
 interface Discount {
   value: number
 }
+
 export interface LineItem {
   id: string
   variantId: string
@@ -20,10 +20,10 @@ export interface LineItem {
   variant: Partial<ProductVariant>
 }
 
-
 export interface Cart {
   id: string
   createdAt: string
+  completedAt: string
   currency: { code: string }
   taxesIncluded: boolean
   // taxes, discounts excluded
@@ -32,4 +32,4 @@ export interface Cart {
   totalPrice: number
   lineItems: any[]
   discounts: Discount[]
-} 
+}

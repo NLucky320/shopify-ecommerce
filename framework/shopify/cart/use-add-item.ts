@@ -1,4 +1,5 @@
 
+
 import { useAddItem } from "@common/cart"
 import { UseAddItem } from "@common/cart/use-add-item"
 import useCart from "@common/cart/use-cart"
@@ -6,7 +7,7 @@ import { Cart } from "@common/types/cart"
 import { MutationHook } from "@common/types/hooks"
 import { CheckoutLineItemsAddPayload } from "@framework/schema"
 import { checkoutToCart, getCheckoutId } from "@framework/utils"
-import { checkoutLineItemsAddMutation } from "@framework/utils/mutation"
+import { checkoutLineItemsAddMutation } from "@framework/utils/mutations"
 
 export default useAddItem as UseAddItem<typeof handler>
 

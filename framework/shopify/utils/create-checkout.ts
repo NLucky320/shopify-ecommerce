@@ -1,8 +1,10 @@
 import { ApiFetcher } from "@common/types/api"
-import { checkoutCreateMutation } from "./mutation"
+import { SHOPIFY_CHECKOUT_ID_COOKIE, SHOPIFY_CHECKOUT_URL_COOKIE, SHOPIFY_COOKIE_EXPIRE } from "@framework/const"
 import { Checkout, CheckoutCreatePayload, Maybe } from "@framework/schema"
 import Cookies from "js-cookie"
-import { SHOPIFY_CHECKOUT_ID_COOKIE, SHOPIFY_CHECKOUT_URL_COOKIE, SHOPIFY_COOKIE_EXPIRE } from "@framework/const"
+import { checkoutCreateMutation } from "./mutations"
+
+
 
 const createCheckout = async (
   fetch: ApiFetcher<{checkoutCreate: CheckoutCreatePayload}>
@@ -13,10 +15,12 @@ const createCheckout = async (
 
   const { checkout } = data.checkoutCreate
 
-    if (!checkout) {
+  if (!checkout) {
     throw new Error("Checkout cannot be created!")
   }
+
   const checkoutId = checkout?.id
+
   if (checkoutId) {
     const options = {
       expires: SHOPIFY_COOKIE_EXPIRE
@@ -26,8 +30,8 @@ const createCheckout = async (
     Cookies.set(SHOPIFY_CHECKOUT_URL_COOKIE, checkout?.webUrl, options)
   }
 
-
   return checkout
 }
+
 
 export default createCheckout

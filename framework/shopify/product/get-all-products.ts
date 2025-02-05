@@ -13,7 +13,6 @@ type ReturnType = {
 
 const getAllProducts = async (config: ApiConfig): Promise<Product[]> => {
   const { data } = await config.fetch<ReturnType>({
-
     query: getAllProductsQuery
   })
 
@@ -24,4 +23,4 @@ const getAllProducts = async (config: ApiConfig): Promise<Product[]> => {
   return products
 }
 
-export default getAllProducts;
+export default getAllProducts

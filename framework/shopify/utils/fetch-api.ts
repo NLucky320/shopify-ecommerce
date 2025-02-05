@@ -6,7 +6,7 @@ import { API_URL, STOREFRONT_TOKEN } from "@framework/const"
 
 const fetchApi = async <T>({
   query,
-variables }: ApiFetcherOptions
+  variables }: ApiFetcherOptions
 ): Promise<ApiFetcherResults<T>> => {
   const res = await fetch(API_URL!, {
     method: "POST",
@@ -19,7 +19,6 @@ variables }: ApiFetcherOptions
       variables
     })
   })
-
   const { data, errors} = await res.json()
   // ?? is checking if left hand expression is null or undefined -> if it is go with right expression
   // || is checking if left hand expression is null, undefined, "", 0, false

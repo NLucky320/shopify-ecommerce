@@ -1,4 +1,5 @@
 import { checkoutDetailFragment } from "../common"
+
 const checkoutLineItemsAdd = `
   mutation(
     $checkoutId: ID!,

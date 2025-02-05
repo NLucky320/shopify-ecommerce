@@ -1,4 +1,5 @@
 
+
 export const checkoutDetailFragment = `
   id
   webUrl
@@ -30,7 +31,7 @@ export const checkoutDetailFragment = `
           id
           sku
           title
-            selectedOptions {
+          selectedOptions {
             name
             value
           }

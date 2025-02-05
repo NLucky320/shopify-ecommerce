@@ -1,12 +1,12 @@
-import { useUpdateItem } from "@common/cart"
 
+import { useUpdateItem} from "@common/cart"
 import { UseUpdateItem } from "@common/cart/use-update-item"
 import { Cart } from "@common/types/cart"
 import { MutationHook } from "@common/types/hooks"
 import { CheckoutLineItemsUpdatePayload } from "@framework/schema"
 import { checkoutToCart, getCheckoutId } from "@framework/utils"
+import { checkoutLineItemsUpdateMutation } from "@framework/utils/mutations"
 import useCart from "./use-cart"
-import { checkoutLineItemsUpdateMutation } from "@framework/utils/mutation"
 
 export default useUpdateItem as UseUpdateItem<typeof handler>
 
@@ -24,7 +24,7 @@ export type UpdateItemDescriptor = {
 
 export const handler: MutationHook<UpdateItemDescriptor> = {
   fetcherOptions: {
-   query: checkoutLineItemsUpdateMutation
+    query: checkoutLineItemsUpdateMutation
   },
   async fetcher({
     input: item,
@@ -33,7 +33,7 @@ export const handler: MutationHook<UpdateItemDescriptor> = {
   }) {
     const { data } = await fetch({
       ...options,
-     variables: {
+      variables: {
         checkoutId: getCheckoutId(),
         lineItems: [
           {
@@ -45,17 +45,16 @@ export const handler: MutationHook<UpdateItemDescriptor> = {
       }
     })
 
-      const cart = checkoutToCart(data.checkoutLineItemsUpdate.checkout)
+    const cart = checkoutToCart(data.checkoutLineItemsUpdate.checkout)
     return cart
   },
-  
   useHook: ({ fetch }) => () => {
     const { mutate: updateCart } = useCart()
 
     return async (input) => {
       const data = await fetch(input)
-       updateCart(data, false)
+      updateCart(data, false)
       return data
     }
   }
-  }
+}

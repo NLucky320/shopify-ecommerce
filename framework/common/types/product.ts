@@ -1,4 +1,3 @@
-import { ProductOption, ProductVariant } from './../../shopify/schema.d';
 
 export interface ProductImage {
   url: string
@@ -20,10 +19,11 @@ export interface ProductOption {
   displayName: string
   values: ProductOptionValues[]
 }
+
 export interface ProductVariant {
   id: string
   name: string
-    sku: string
+  sku: string
   image?: ProductImage
   requiresShipping: boolean
   price: number
@@ -38,7 +38,7 @@ export interface Product {
   slug: string
   path: string
   images: ProductImage[]
-  price: ProductPrice
-  options: ProductOption[]
+  price: ProductPrice,
+  options: ProductOption[],
   variants: ProductVariant[]
 }

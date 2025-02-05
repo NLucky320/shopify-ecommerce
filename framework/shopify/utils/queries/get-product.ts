@@ -1,4 +1,6 @@
 
+
+
 const getProductQuery = `
 query productByHandle($slug: String!) {
   productByHandle(handle: $slug) {

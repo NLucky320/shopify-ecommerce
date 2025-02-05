@@ -8,7 +8,6 @@ import CartItem from '../CartItem'
 import { Button } from '@components/ui'
 
 const CartSidebar: FC = () => {
-
   const { closeSidebar} = useUI()
   const { data, isEmpty } = useCart()
 
@@ -23,7 +22,7 @@ const CartSidebar: FC = () => {
         <div className="flex items-start justify-between space-x-3">
           <div className="h-7 flex items-center">
             <button
-            onClick={closeSidebar}
+              onClick={closeSidebar}
               className="hover:text-gray-500 transition ease-in-out duration-150"
             >
               <Cross className="h-6 w-6" />
@@ -52,15 +51,12 @@ const CartSidebar: FC = () => {
             My Cart
           </h2>
           <ul className="py-6 space-y-6 sm:py-0 sm:space-y-0 sm:divide-y sm:divide-accents-3 border-t border-accents-3">
-    { data?.lineItems.map((item: LineItem) =>
-     <CartItem
+            { data?.lineItems.map((item: LineItem) =>
+              <CartItem
                 key={item.id}
                 item={item}
                 currencyCode={data.currency.code}
               />
-              // <div key={item.id}>
-              //   {item.name} - {item.quantity}
-              // </div>
             )}
           </ul>
         </div>
@@ -82,12 +78,12 @@ const CartSidebar: FC = () => {
             </ul>
             <div className="flex justify-between border-t border-accents-3 py-3 font-bold mb-10">
               <span>Total</span>
-               <span>{data?.totalPrice} {data?.currency.code}</span>
+              <span>{data?.totalPrice} {data?.currency.code}</span>
             </div>
           </div>
-       <Button
-               Component="a"
-            href="/"
+          <Button
+            Component="a"
+            href="/api/checkout"
           >
             Proceed to Checkout
           </Button>

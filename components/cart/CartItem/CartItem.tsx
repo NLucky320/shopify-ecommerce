@@ -6,8 +6,8 @@ import { Trash, Plus, Minus } from '@components/icons'
 import { LineItem } from '@common/types/cart'
 import { Swatch } from '@components/product'
 import useRemoveItem from '@framework/cart/use-remove-item'
-import { useUpdateItem } from '@common/cart'
 import { ChangeEvent, useState } from 'react'
+import useUpdateItem from '@framework/cart/use-update-item'
 
 const CartItem = ({
   item,
@@ -16,31 +16,34 @@ const CartItem = ({
   item: LineItem
   currencyCode: string
 }) => {
-  const price = (item.variant.price! * item.quantity) || 0
-  const { options } = item
   const removeItem = useRemoveItem()
   const updateItem = useUpdateItem()
-  const [quantity, setQuantity] = useState(item.quantity)
-  const handleQuantityChange = (val: number) => {
 
+  const [quantity, setQuantity] = useState(item.quantity)
+  const price = (item.variant.price! * item.quantity) || 0
+  const { options } = item
+
+  const handleQuantityChange = (val: number) => {
     if (Number.isInteger(val) && val >= 0) {
       setQuantity(val)
-   
-    updateItem({
+      updateItem({
         id: item.id,
         variantId: item.variantId,
         quantity: val
       })
     }
   }
+
   const handleQuantity = async (e: ChangeEvent<HTMLInputElement>) => {
     const val = Number(e.target.value)
     handleQuantityChange(val)
   }
+
   const incrementQuantity = async (n = 1) => {
     const val = Number(quantity) + n
-   handleQuantityChange(val)
+    handleQuantityChange(val)
   }
+
   return (
     <li
       className={cn('flex flex-row space-x-8 py-8', {
@@ -48,7 +51,8 @@ const CartItem = ({
       })}
     >
       <div className="w-16 h-16 bg-violet relative overflow-hidden cursor-pointer">
-           <Image
+        <Image
+          onClick={() => {}}
           className={s.productImage}
           width={150}
           height={150}
@@ -66,7 +70,7 @@ const CartItem = ({
             {item.name}
           </span>
         </Link>
-              <div className="flex p-1">
+        <div className="flex p-1">
           { options && options.length > 0 &&
             (options.map((option) => {
               const value = option.values[0]
@@ -86,7 +90,7 @@ const CartItem = ({
         </div>
         <div className="flex items-center mt-3">
           <button type="button">
-           <Minus onClick={() => incrementQuantity(-1)}/>
+            <Minus onClick={() => incrementQuantity(-1)}/>
           </button>
           <label>
             <input
@@ -94,19 +98,19 @@ const CartItem = ({
               max={99}
               min={0}
               className={s.quantity}
-                      value={quantity}
+              value={quantity}
               onChange={handleQuantity}
             />
           </label>
           <button type="button">
-                   <Plus onClick={() => incrementQuantity(+1)}/>
+            <Plus onClick={() => incrementQuantity(+1)}/>
           </button>
         </div>
       </div>
       <div className="flex flex-col justify-between space-y-2 text-base">
         <span>{price} {currencyCode}</span>
         <button
-            onClick={() => {
+          onClick={() => {
             removeItem({id: item.id})
           }}
           className="flex justify-end outline-none"
